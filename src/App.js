@@ -1,6 +1,6 @@
 import "./App.css";
-import MainBody from "./components/MainBody";
-import NavBar from "./components/NavBar";
+import MainBody from "./components/layout/MainBody";
+import NavBar from "./components/layout/NavBar";
 
 function App() {
   return (

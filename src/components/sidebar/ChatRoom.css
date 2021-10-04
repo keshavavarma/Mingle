@@ -1,0 +1,29 @@
+.chatroom {
+  display: flex;
+  padding: 1rem;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+}
+.chatroom:hover {
+  background-color: white;
+}
+.selected {
+  border-left: 10px solid rgb(97, 100, 166);
+}
+.chatroom > .chat_info {
+  margin-left: 1rem;
+}
+.room_name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: none;
+  border: none;
+}
+.room_name:focus {
+  outline-color: rgb(224, 224, 237);
+}
+.last_message {
+  white-space: nowrap;
+  max-width: 10rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

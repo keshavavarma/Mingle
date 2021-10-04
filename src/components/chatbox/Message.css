@@ -32,3 +32,11 @@
   max-width: 20rem;
   max-height: 15rem;
 }
+.messenger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.messenger > p {
+  font-weight: bold;
+}
