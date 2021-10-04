@@ -1,0 +1,39 @@
+.navbar {
+  display: flex;
+  width: 100vw;
+  height: 6vh;
+  background-color: rgb(97, 100, 166);
+  color: white;
+}
+.search_flex {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 0.65;
+}
+
+.searchbox {
+  max-width: 550px;
+  min-width: 550px;
+  height: 2rem;
+  padding: 0 0.5rem;
+  border: none;
+  border-radius: 0.4rem;
+  background-color: rgb(224, 224, 237);
+}
+.searchbox:focus {
+  background-color: white;
+  outline: none;
+}
+.nav_actions_flex {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 0.35;
+}
+.nav_actions_flex > .avatar {
+  margin-right: 1rem;
+}
+.nav_actions_flex > .more_icon {
+  margin-right: 1rem;
+}

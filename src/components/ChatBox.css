@@ -1,0 +1,7 @@
+.chatbox {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(240, 240, 240);
+  box-shadow: -10px 0px 10px -12px rgba(0, 0, 0, 0.5);
+  flex: 0.7;
+}

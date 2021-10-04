@@ -1,0 +1,28 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  flex: 0.3;
+  height: 100%;
+  background-color: rgb(240, 240, 240);
+}
+.chatheader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  box-shadow: 0px 10px 10px -12px rgba(0, 0, 0, 0.5);
+}
+.chatheader > h2 {
+  margin-left: 1rem;
+}
+.chatheader_actions {
+  display: flex;
+  align-items: center;
+}
+.chatheader_actions > * {
+  margin-right: 1rem;
+}
+.chatrooms {
+  height: 100%;
+  overflow: auto;
+}
