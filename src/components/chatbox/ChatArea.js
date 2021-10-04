@@ -1,6 +1,6 @@
 import React from "react";
 import "./ChatArea.css";
-import picture from "../../logo512.png";
+import picture from "../../images/pogba.jpeg";
 import Message from "./Message";
 const ChatArea = () => {
   return (

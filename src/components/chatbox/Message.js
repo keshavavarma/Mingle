@@ -73,7 +73,7 @@ const Message = (props) => {
           Lorem ipsum dolor sit ametLorem ipsum dolor sit amet consectetur,
         </p>
       </div>
-      <p className="message_timestamp">timestamp</p>
+      <p className="message_timestamp">{new Date().toLocaleDateString()}</p>
     </div>
   );
 };
