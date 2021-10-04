@@ -1,4 +1,4 @@
 .chatarea {
   flex: 0.875;
-  border-bottom: 1px solid black;
+  overflow: auto;
 }
