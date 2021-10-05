@@ -9,7 +9,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login, currentUser } = useAuth();
+  const { login, googleSignIn } = useAuth();
   const history = useHistory();
 
   const submitHandler = async (e) => {
@@ -24,6 +24,17 @@ const Login = () => {
       console.log(error);
       setError(error.message);
       setLoading(false);
+    }
+  };
+
+  const googleHandler = async (e) => {
+    e.preventDefault();
+    try {
+      await googleSignIn();
+      history.push("/");
+    } catch (error) {
+      console.log(error);
+      setError(error.message);
     }
   };
 
@@ -58,6 +69,13 @@ const Login = () => {
         />
         <button disabled={loading} className="register_button" type="submit">
           {loading ? <CircularProgress color="inherit" /> : "Login"}
+        </button>
+        <button
+          disabled={loading}
+          className="register_button"
+          onClick={googleHandler}
+        >
+          Login with Google
         </button>
         <p>
           Don't have an Account?<Link to="/Register"> Register</Link>
