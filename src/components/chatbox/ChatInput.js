@@ -1,16 +1,26 @@
-import React from "react";
+import { useState } from "react";
 import "./ChatInput.css";
 import SendIcon from "@mui/icons-material/Send";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import GifIcon from "@mui/icons-material/Gif";
-const ChatInput = () => {
+const ChatInput = (props) => {
+  const [input, setInput] = useState("");
+
   return (
     <div className="chatinput">
-      <form className="message_form">
+      <form
+        className="message_form"
+        onSubmit={(e) => {
+          props.submitHandler(e, input);
+          setInput("");
+        }}
+      >
         <input
+          value={input}
           className="message_input"
           placeholder="Type Message Here"
+          onChange={(e) => setInput(e.target.value)}
         ></input>
         <div className="message_actions">
           <div className="message_emojis">

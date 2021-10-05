@@ -20,7 +20,7 @@ const Message = (props) => {
   return (
     <div className={props.receiver ? "message" : "message sender"}>
       <div className="messenger">
-        <p>Name</p>
+        <p>{props.name}</p>
         <div className="message_menu">
           <IconButton
             id="demo-positioned-button"
@@ -69,11 +69,12 @@ const Message = (props) => {
         ) : (
           ""
         )}
-        <p className="message_text">
-          Lorem ipsum dolor sit ametLorem ipsum dolor sit amet consectetur,
-        </p>
+        <p className="message_text">{props.message}</p>
       </div>
-      <p className="message_timestamp">{new Date().toLocaleDateString()}</p>
+      <p className="message_timestamp">
+        {props.timestamp &&
+          new Date(props.timestamp.toDate()).toLocaleDateString()}
+      </p>
     </div>
   );
 };

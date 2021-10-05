@@ -1,13 +1,19 @@
-import React from "react";
 import "./ChatArea.css";
-import picture from "../../images/pogba.jpeg";
 import Message from "./Message";
-const ChatArea = () => {
+
+const ChatArea = ({ messages, currentUser }) => {
   return (
     <div className="chatarea">
-      <Message receiver={true} />
-      <Message receiver={false} picture={picture} />
-      <Message receiver={true} picture={picture} />
+      {messages
+        ? messages.map((message) => (
+            <Message
+              receiver={currentUser.uid === message.data.user}
+              name={message.data.name}
+              timestamp={message.timestamp}
+              message={message.data.message}
+            />
+          ))
+        : ""}
     </div>
   );
 };

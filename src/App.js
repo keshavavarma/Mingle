@@ -5,6 +5,7 @@ import Home from "./components/layout/Home";
 import ProtectedRoute from "./components/authentication/ProtectedRoute";
 import { AuthProvider } from "./contexts/AuthContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import ChatArea from "./components/chatbox/ChatArea";
 function App() {
   return (
     <Router>
@@ -14,6 +15,7 @@ function App() {
             <ProtectedRoute exact path="/" component={Home} />
             <Route path="/Login" component={Login} />
             <Route path="/Register" component={Register} />
+            <Route path="/rooms/:roomID" component={Home} />
           </Switch>
         </div>
       </AuthProvider>

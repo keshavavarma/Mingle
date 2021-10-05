@@ -15,6 +15,9 @@ import {
   addDoc,
   doc,
   updateDoc,
+  onSnapshot,
+  orderBy,
+  serverTimestamp,
 } from "firebase/firestore";
 
 const Sidebar = () => {
@@ -23,20 +26,16 @@ const Sidebar = () => {
   const [newRoom, setNewRoom] = useState();
   const [updatedName, setUpdatedName] = useState();
 
-  const getRooms = async () => {
-    const querySnapshot = await getDocs(collection(db, "rooms"));
-    setRooms(
-      querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        data: doc.data(),
-      }))
-    );
-    console.log(rooms);
-  };
+  // const getRooms = async () => {
+  //   // const querySnapshot = await getDocs();
+
+  //   console.log(rooms);
+  // };
 
   const createRoomHandler = async () => {
     const newRoom = await addDoc(collection(db, "rooms"), {
       roomName: "New Room",
+      timestamp: serverTimestamp(),
     });
     setNewRoom(newRoom);
   };
@@ -50,8 +49,17 @@ const Sidebar = () => {
   };
 
   useEffect(() => {
-    getRooms();
-  }, [newRoom, updateRoomName]);
+    const q = query(collection(db, "rooms"), orderBy("timestamp", "desc"));
+    onSnapshot(q, (snapshot) => {
+      setRooms(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }))
+      );
+      console.log(rooms);
+    });
+  }, [newRoom, updatedName]);
 
   return (
     <div className="sidebar">

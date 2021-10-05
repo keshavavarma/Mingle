@@ -11,6 +11,7 @@ const Register = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmationRef = useRef();
+  const nameRef = useRef();
   const { signup, currentUser } = useAuth();
   const history = useHistory();
 
@@ -23,7 +24,13 @@ const Register = () => {
 
     try {
       setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
+      const user = await signup(
+        emailRef.current.value,
+        passwordRef.current.value
+      );
+      user.updateProfile({
+        displayName: nameRef.current.value,
+      });
       setSuccess("Account Created Successfully");
       setLoading(false);
       history.push("/");
@@ -58,6 +65,14 @@ const Register = () => {
             {success}
           </Alert>
         )}
+        <input
+          ref={nameRef}
+          className="inputfield"
+          type="text"
+          placeholder="Name"
+          onChange={(e) => (nameRef.current.value = e.target.value)}
+        />
+
         <input
           ref={emailRef}
           className="inputfield"
