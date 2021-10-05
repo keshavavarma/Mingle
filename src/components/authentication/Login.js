@@ -1,31 +1,67 @@
-import React from "react";
+import { useRef, useState } from "react";
 import "./Register.css";
+import Alert from "@mui/material/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
+import { useAuth } from "../../contexts/AuthContext";
+import { Link, useHistory } from "react-router-dom";
 const Login = () => {
-  const submitHandler = (e) => {
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const { login, currentUser } = useAuth();
+  const history = useHistory();
+
+  const submitHandler = async (e) => {
     e.preventDefault();
+
+    try {
+      setLoading(true);
+      await login(emailRef.current.value, passwordRef.current.value);
+      setLoading(false);
+      history.push("/");
+    } catch (error) {
+      console.log(error);
+      setError(error.message);
+      setLoading(false);
+    }
   };
+
   return (
     <div className="form_container">
       <form className="registration_form" onSubmit={submitHandler}>
         <h2 className="form_title">Login</h2>
-
+        {error && (
+          <Alert
+            severity="error"
+            onClose={() => {
+              setError("");
+            }}
+          >
+            {error}
+          </Alert>
+        )}
         <input
+          ref={emailRef}
           className="inputfield"
-          id="email"
           type="email"
           placeholder="Email"
+          onChange={(e) => (emailRef.current.value = e.target.value)}
         />
 
         <input
+          ref={passwordRef}
           className="inputfield"
-          id="password"
           type="password"
           placeholder="Password"
+          onChange={(e) => (passwordRef.current.value = e.target.value)}
         />
-        <button className="register_button" type="submit">
-          Login
+        <button disabled={loading} className="register_button" type="submit">
+          {loading ? <CircularProgress color="inherit" /> : "Login"}
         </button>
-        <p>Don't have an Account? Register</p>
+        <p>
+          Don't have an Account?<Link to="/Register"> Register</Link>
+        </p>
       </form>
     </div>
   );

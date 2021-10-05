@@ -1,19 +1,23 @@
 import "./App.css";
 import Login from "./components/authentication/Login";
 import Register from "./components/authentication/Register";
-import MainBody from "./components/layout/MainBody";
-import NavBar from "./components/layout/NavBar";
+import Home from "./components/layout/Home";
+import ProtectedRoute from "./components/authentication/ProtectedRoute";
 import { AuthProvider } from "./contexts/AuthContext";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 function App() {
   return (
-    <AuthProvider>
-      <div className="App">
-        <Login />
-        <Register />
-        <NavBar />
-        <MainBody />
-      </div>
-    </AuthProvider>
+    <Router>
+      <AuthProvider>
+        <div className="App">
+          <Switch>
+            <ProtectedRoute exact path="/" component={Home} />
+            <Route path="/Login" component={Login} />
+            <Route path="/Register" component={Register} />
+          </Switch>
+        </div>
+      </AuthProvider>
+    </Router>
   );
 }
 

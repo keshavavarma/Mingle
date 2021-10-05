@@ -3,6 +3,7 @@ import "./Register.css";
 import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useAuth } from "../../contexts/AuthContext";
+import { Link, useHistory } from "react-router-dom";
 const Register = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -11,6 +12,7 @@ const Register = () => {
   const passwordRef = useRef();
   const passwordConfirmationRef = useRef();
   const { signup, currentUser } = useAuth();
+  const history = useHistory();
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -23,18 +25,13 @@ const Register = () => {
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
       setSuccess("Account Created Successfully");
-      emailRef.current.value = "";
-      passwordConfirmationRef.current.value = "";
-      passwordRef.current.value = "";
+      setLoading(false);
+      history.push("/");
     } catch (error) {
       console.log(error);
-      setError("Could Not Create an Account");
-      emailRef.current.value = "";
-      passwordConfirmationRef.current.value = "";
-      passwordRef.current.value = "";
+      setError(error.message);
+      setLoading(false);
     }
-    console.log("Current User", currentUser);
-    setLoading(false);
   };
 
   return (
@@ -88,7 +85,9 @@ const Register = () => {
         <button disabled={loading} className="register_button" type="submit">
           {loading ? <CircularProgress color="inherit" /> : "Register"}
         </button>
-        <p>Have an Account? Login</p>
+        <p>
+          Have an Account? <Link to="/Login"> Login</Link>
+        </p>
       </form>
     </div>
   );

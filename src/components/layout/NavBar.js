@@ -8,15 +8,27 @@ import IconButton from "@mui/material/IconButton";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import LogoutIcon from "@mui/icons-material/Logout";
-const NavBar = () => {
+import { useHistory, Redirect } from "react-router";
+const NavBar = (props) => {
   const [darkMode, setDarkMode] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const history = useHistory();
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const logoutHandler = async () => {
+    setAnchorEl(null);
+    try {
+      await props.logout();
+      history.push("/Login");
+    } catch (error) {
+      console.log(error.message);
+    }
   };
   return (
     <div className="navbar">
@@ -64,7 +76,7 @@ const NavBar = () => {
                 </>
               )}
             </MenuItem>
-            <MenuItem onClick={handleClose}>
+            <MenuItem onClick={logoutHandler}>
               Logout <LogoutIcon sx={{ marginLeft: "0.5rem" }} />
             </MenuItem>
           </Menu>
