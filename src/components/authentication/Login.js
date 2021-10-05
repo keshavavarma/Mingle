@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import "./Register.css";
 import Alert from "@mui/material/Alert";
+import GoogleIcon from "@mui/icons-material/Google";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useAuth } from "../../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
@@ -72,10 +73,11 @@ const Login = () => {
         </button>
         <button
           disabled={loading}
-          className="register_button"
+          className="register_button_google"
           onClick={googleHandler}
         >
-          Login with Google
+          <GoogleIcon />
+          <span>Login</span>
         </button>
         <p>
           Don't have an Account?<Link to="/Register"> Register</Link>

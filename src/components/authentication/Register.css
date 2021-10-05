@@ -48,3 +48,24 @@
   text-align: center;
   margin-top: 1rem;
 }
+.register_button_google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  color: rgb(97, 100, 166);
+  font-size: 1.2rem;
+  font-weight: bold;
+  width: 100%;
+  padding: 1rem 2rem;
+  margin-top: 2rem;
+  border-radius: 0.3rem;
+  border: 1px solid rgb(97, 100, 166);
+}
+.register_button_google > span {
+  margin-left: 0.5rem;
+}
+.register_button_google:hover {
+  background-color: rgb(97, 100, 166);
+  color: white;
+}
