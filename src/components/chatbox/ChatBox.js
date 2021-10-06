@@ -17,6 +17,7 @@ import {
   serverTimestamp,
   onSnapshot,
   orderBy,
+  deleteDoc,
 } from "firebase/firestore";
 
 const ChatBox = () => {
@@ -35,7 +36,7 @@ const ChatBox = () => {
         snapshot.docs.map((doc) => ({
           id: doc.id,
           data: doc.data(),
-          timestamp: doc.timestamp,
+          timestamp: Date(doc.timestamp),
         }))
       );
       console.log(messages);

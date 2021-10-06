@@ -7,6 +7,8 @@ const ChatArea = ({ messages, currentUser }) => {
       {messages
         ? messages.map((message) => (
             <Message
+              key={message.id}
+              id={message.id}
               receiver={currentUser.uid === message.data.user}
               name={message.data.name}
               timestamp={message.timestamp}

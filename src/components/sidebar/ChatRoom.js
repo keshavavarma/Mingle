@@ -1,18 +1,29 @@
-import { Avatar } from "@mui/material";
+import { Avatar, IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import React, { useState, useEffect, useRef } from "react";
 import "./ChatRoom.css";
 import { Link } from "react-router-dom";
+import { db } from "../../firebase";
+import { doc, deleteDoc } from "firebase/firestore";
 
 const ChatRoom = (props) => {
+  const [hover, setHover] = useState();
   const roomNameRef = useRef();
 
   useEffect(() => {
     roomNameRef.current.value = props.name;
   }, []);
 
+  const deleteRoom = async () => {
+    await deleteDoc(doc(db, `rooms/${props.id}`));
+  };
   return (
     <Link to={`/rooms/${props.id}`}>
-      <div className={props.selected ? "chatroom selected" : "chatroom"}>
+      <div
+        className={props.selected ? "chatroom selected" : "chatroom"}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+      >
         <Avatar
           src={`https://avatars.dicebear.com/api/initials/${props.name}.svg`}
           alt="K"
@@ -32,6 +43,11 @@ const ChatRoom = (props) => {
             repellendus fuga, reiciendis minus natus!
           </p>
         </div>
+        {hover && (
+          <IconButton onClick={deleteRoom}>
+            <DeleteIcon color="error" />
+          </IconButton>
+        )}
       </div>
     </Link>
   );

@@ -8,7 +8,12 @@ import EditIcon from "@mui/icons-material/Edit";
 import StarIcon from "@mui/icons-material/Star";
 import ReplyIcon from "@mui/icons-material/Reply";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useParams } from "react-router";
+import { db } from "../../firebase";
+import { doc, deleteDoc } from "firebase/firestore";
+
 const Message = (props) => {
+  const { roomID } = useParams();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -16,6 +21,9 @@ const Message = (props) => {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const deleteMessage = async (id) => {
+    await deleteDoc(doc(db, `rooms/${roomID}/messages/${id}`));
   };
   return (
     <div className={props.receiver ? "message" : "message sender"}>
@@ -55,7 +63,12 @@ const Message = (props) => {
             <MenuItem onClick={handleClose}>
               <EditIcon fontSize="small" sx={{ color: "rgb(97, 100, 166)" }} />
             </MenuItem>
-            <MenuItem onClick={handleClose}>
+            <MenuItem
+              onClick={() => {
+                deleteMessage(props.id);
+                handleClose();
+              }}
+            >
               <DeleteIcon color="error" />
             </MenuItem>
           </Menu>
@@ -73,7 +86,7 @@ const Message = (props) => {
       </div>
       <p className="message_timestamp">
         {props.timestamp &&
-          new Date(props.timestamp.toDate()).toLocaleDateString()}
+          new Date(props.timestamp).toLocaleString().replace(/:[^:]*$/, "")}
       </p>
     </div>
   );

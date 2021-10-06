@@ -9,8 +9,10 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useHistory, Redirect } from "react-router";
+import { useAuth } from "../../contexts/AuthContext";
 const NavBar = (props) => {
   const [darkMode, setDarkMode] = useState(false);
+  const { currentUser } = useAuth();
   const [anchorEl, setAnchorEl] = useState(null);
   const history = useHistory();
   const open = Boolean(anchorEl);
@@ -81,7 +83,15 @@ const NavBar = (props) => {
             </MenuItem>
           </Menu>
         </div>
-        <Avatar src="" alt="Profile" className="avatar" />
+        <Avatar
+          src={
+            currentUser.photoURL
+              ? currentUser.photoURL
+              : `https://avatars.dicebear.com/api/initials/${currentUser.displayName}.svg`
+          }
+          alt="Profile"
+          className="avatar"
+        />
       </div>
     </div>
   );
