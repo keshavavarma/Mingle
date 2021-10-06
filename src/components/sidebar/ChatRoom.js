@@ -5,17 +5,24 @@ import "./ChatRoom.css";
 import { Link } from "react-router-dom";
 import { db } from "../../firebase";
 import { doc, deleteDoc } from "firebase/firestore";
+import { useHistory } from "react-router";
 
 const ChatRoom = (props) => {
   const [hover, setHover] = useState();
   const roomNameRef = useRef();
-
+  const history = useHistory();
   useEffect(() => {
     roomNameRef.current.value = props.name;
   }, []);
 
   const deleteRoom = async () => {
+    // const q = query(collection(db, `rooms/${props.id}/messages`));
+    // const unsub = onSnapshot(q, (snapshot) => {
+    //   snapshot.docs.forEach(async (document) => console.log(document));
+    // });
     await deleteDoc(doc(db, `rooms/${props.id}`));
+    history.replace("/");
+    // return unsub;
   };
   return (
     <Link to={`/rooms/${props.id}`}>
