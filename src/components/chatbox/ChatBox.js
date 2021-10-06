@@ -31,7 +31,7 @@ const ChatBox = () => {
       collection(db, `rooms/${roomID}/messages`),
       orderBy("timestamp", "asc")
     );
-    onSnapshot(q, (snapshot) => {
+    const unsub = onSnapshot(q, (snapshot) => {
       setMessages(
         snapshot.docs.map((doc) => ({
           id: doc.id,
@@ -41,6 +41,7 @@ const ChatBox = () => {
       );
       console.log(messages);
     });
+    return unsub;
   }, [roomID, newMessage]);
 
   const submitHandler = async (e, input) => {

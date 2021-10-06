@@ -4,6 +4,8 @@ import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useAuth } from "../../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
+import { auth } from "../../firebase";
+import { updateProfile } from "@firebase/auth";
 const Register = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -14,7 +16,6 @@ const Register = () => {
   const nameRef = useRef();
   const { signup, currentUser } = useAuth();
   const history = useHistory();
-
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -24,11 +25,9 @@ const Register = () => {
 
     try {
       setLoading(true);
-      const user = await signup(
-        emailRef.current.value,
-        passwordRef.current.value
-      );
-      user.updateProfile({
+      await signup(emailRef.current.value, passwordRef.current.value);
+      const user = auth.currentUser;
+      updateProfile(user, {
         displayName: nameRef.current.value,
       });
       setSuccess("Account Created Successfully");

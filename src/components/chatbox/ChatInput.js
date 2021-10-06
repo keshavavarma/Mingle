@@ -20,7 +20,9 @@ const ChatInput = (props) => {
           value={input}
           className="message_input"
           placeholder="Type Message Here"
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => {
+            if (e.target.value.length !== 0) setInput(e.target.value);
+          }}
         ></input>
         <div className="message_actions">
           <div className="message_emojis">

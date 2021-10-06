@@ -26,12 +26,6 @@ const Sidebar = () => {
   const [newRoom, setNewRoom] = useState();
   const [updatedName, setUpdatedName] = useState();
 
-  // const getRooms = async () => {
-  //   // const querySnapshot = await getDocs();
-
-  //   console.log(rooms);
-  // };
-
   const createRoomHandler = async () => {
     const newRoom = await addDoc(collection(db, "rooms"), {
       roomName: "New Room",
@@ -50,15 +44,15 @@ const Sidebar = () => {
 
   useEffect(() => {
     const q = query(collection(db, "rooms"), orderBy("timestamp", "desc"));
-    onSnapshot(q, (snapshot) => {
+    const unsub = onSnapshot(q, (snapshot) => {
       setRooms(
         snapshot.docs.map((doc) => ({
           id: doc.id,
           data: doc.data(),
         }))
       );
-      console.log(rooms);
     });
+    return unsub;
   }, [newRoom, updatedName]);
 
   return (

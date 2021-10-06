@@ -85,9 +85,10 @@ const NavBar = (props) => {
         </div>
         <Avatar
           src={
-            currentUser.photoURL
+            currentUser &&
+            (currentUser.photoURL
               ? currentUser.photoURL
-              : `https://avatars.dicebear.com/api/initials/${currentUser.displayName}.svg`
+              : `https://avatars.dicebear.com/api/initials/${currentUser.displayName}.svg`)
           }
           alt="Profile"
           className="avatar"
