@@ -46,22 +46,23 @@ const ChatBox = () => {
 
   const submitHandler = async (e, input) => {
     e.preventDefault();
-
-    const newMessage = await addDoc(
-      collection(db, `rooms/${roomID}/messages`),
-      {
-        user: currentUser.uid,
-        message: input,
-        name: currentUser.displayName,
-        timestamp: serverTimestamp(),
-      }
-    );
-    setNewMessage(newMessage);
+    if (input.length !== 0 && roomID) {
+      const newMessage = await addDoc(
+        collection(db, `rooms/${roomID}/messages`),
+        {
+          user: currentUser.uid,
+          message: input,
+          name: currentUser.displayName,
+          timestamp: serverTimestamp(),
+        }
+      );
+      setNewMessage(newMessage);
+    }
   };
 
   return (
     <div className="chatbox">
-      <ChatArea messages={messages} currentUser={currentUser} />
+      <ChatArea messages={messages} currentUser={currentUser} roomID={roomID} />
       <ChatInput submitHandler={submitHandler} />
     </div>
   );

@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import "./ChatArea.css";
 import Message from "./Message";
 
-const ChatArea = ({ messages, currentUser }) => {
+const ChatArea = ({ messages, currentUser, roomID }) => {
   const scrollRef = useRef();
 
   const scrollToBottom = () => {
@@ -13,6 +13,12 @@ const ChatArea = ({ messages, currentUser }) => {
   }, [messages]);
   return (
     <div className="chatarea">
+      {!roomID && (
+        <div className="info">
+          You Can Chat only in a Room, Please select a Chat Room or Create a New
+          Room
+        </div>
+      )}
       {messages
         ? messages.map((message) => (
             <Message

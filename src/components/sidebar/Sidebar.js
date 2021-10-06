@@ -19,9 +19,10 @@ import {
   orderBy,
   serverTimestamp,
 } from "firebase/firestore";
+import { useParams } from "react-router";
 
 const Sidebar = () => {
-  const [selected, setSelected] = useState(false);
+  const { roomID } = useParams();
   const [rooms, setRooms] = useState([]);
   const [newRoom, setNewRoom] = useState();
   const [updatedName, setUpdatedName] = useState();
@@ -70,7 +71,6 @@ const Sidebar = () => {
       <div className="chatrooms">
         {rooms.map((room) => (
           <ChatRoom
-            selected={selected}
             key={room.id}
             id={room.id}
             name={room.data.roomName}

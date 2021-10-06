@@ -6,8 +6,10 @@ import { Link } from "react-router-dom";
 import { db } from "../../firebase";
 import { doc, deleteDoc } from "firebase/firestore";
 import { useHistory } from "react-router";
+import { useParams } from "react-router";
 
 const ChatRoom = (props) => {
+  const { roomID } = useParams();
   const [hover, setHover] = useState();
   const roomNameRef = useRef();
   const history = useHistory();
@@ -27,7 +29,7 @@ const ChatRoom = (props) => {
   return (
     <Link to={`/rooms/${props.id}`}>
       <div
-        className={props.selected ? "chatroom selected" : "chatroom"}
+        className={roomID === props.id ? "chatroom selected" : "chatroom"}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
