@@ -21,6 +21,11 @@
   border-radius: 0.4rem;
   background-color: rgb(224, 224, 237);
 }
+@media (max-width: 600px) {
+  .searchbox {
+    min-width: 200px;
+  }
+}
 .searchbox:focus {
   background-color: white;
   outline: none;

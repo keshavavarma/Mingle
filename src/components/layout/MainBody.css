@@ -1,5 +1,7 @@
 .mainbody {
   display: flex;
+  flex-wrap: wrap;
+  overflow-x: hidden;
   width: 100vw;
   height: 94vh;
 }
