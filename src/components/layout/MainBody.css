@@ -1,7 +1,11 @@
 .mainbody {
   display: flex;
-  flex-wrap: wrap;
-  overflow-x: hidden;
   width: 100vw;
   height: 94vh;
+}
+@media (max-width: 600px) {
+  .mainbody {
+    flex-wrap: wrap;
+    overflow-x: hidden;
+  }
 }
