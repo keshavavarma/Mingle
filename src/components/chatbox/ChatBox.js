@@ -44,8 +44,11 @@ const ChatBox = () => {
     return unsub;
   }, [roomID, newMessage]);
 
-  const submitHandler = async (e, input) => {
+  const submitHandler = async (e, input, url) => {
     e.preventDefault();
+    if (!url) {
+      url = "";
+    }
     if (input.length !== 0 && roomID) {
       const newMessage = await addDoc(
         collection(db, `rooms/${roomID}/messages`),
@@ -53,6 +56,7 @@ const ChatBox = () => {
           user: currentUser.uid,
           message: input,
           name: currentUser.displayName,
+          picture: url,
           timestamp: serverTimestamp(),
         }
       );

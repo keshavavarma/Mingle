@@ -38,3 +38,11 @@
 .message_emojis > button {
   border: none;
 }
+.chatbox__emoji {
+  height: 250px;
+  overflow-y: hidden;
+  transition: all ease 0.3s;
+}
+.fileUpload {
+  display: none;
+}

@@ -26,6 +26,7 @@ const ChatArea = ({ messages, currentUser, roomID }) => {
               id={message.id}
               receiver={currentUser && currentUser.uid === message.data.user}
               name={message.data.name}
+              picture={message.data.picture}
               timestamp={message.timestamp}
               message={message.data.message}
             />

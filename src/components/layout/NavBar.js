@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./NavBar.css";
 import Avatar from "@mui/material/Avatar";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
@@ -32,6 +32,10 @@ const NavBar = (props) => {
       console.log(error.message);
     }
   };
+  useEffect(() => {
+    console.log("Ran Navbar again");
+    return console.log("unpluged from navbar");
+  }, [currentUser]);
   return (
     <div className="navbar">
       <div className="search_flex">
@@ -90,7 +94,6 @@ const NavBar = (props) => {
               ? currentUser.photoURL
               : `https://avatars.dicebear.com/api/initials/${currentUser.displayName}.svg`)
           }
-          alt="Profile"
           className="avatar"
         />
       </div>
