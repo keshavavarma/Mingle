@@ -29,8 +29,6 @@ const ChatRoom = (props) => {
     );
     const unsub = onSnapshot(q, (snapshot) => {
       setLastMessage(snapshot.docs[0]?.data().message);
-      console.log(snapshot.docs[0]?.data().message);
-      console.log(props.id);
     });
     return unsub;
   }, [props.id]);
