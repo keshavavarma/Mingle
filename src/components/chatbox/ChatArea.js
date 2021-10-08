@@ -10,7 +10,9 @@ const ChatArea = ({ messages, currentUser, roomID }) => {
   };
   useEffect(() => {
     scrollToBottom();
+    return console.log("ChatArea cleanup");
   }, [messages]);
+
   return (
     <div className="chatarea">
       {!roomID && (
@@ -29,6 +31,8 @@ const ChatArea = ({ messages, currentUser, roomID }) => {
               picture={message.data.picture}
               timestamp={message.timestamp}
               message={message.data.message}
+              user={message.data.user}
+              currentUser={currentUser}
             />
           ))
         : ""}

@@ -15,7 +15,6 @@ const ChatInput = (props) => {
   const [photo, setPhoto] = useState();
   const [url, setUrl] = useState();
   const [loading, setLoading] = useState(false);
-  const [uploadDone, setUploadDone] = useState(false);
   const onEmojiClick = (event, emojiObject) => {
     setInput(input + emojiObject.emoji);
   };
@@ -57,6 +56,7 @@ const ChatInput = (props) => {
     if (photo) {
       uploadPicture();
     }
+    return console.log("ChatInput cleanup Done");
   }, [photo]);
 
   return (

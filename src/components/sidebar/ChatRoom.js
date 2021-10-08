@@ -4,18 +4,42 @@ import React, { useState, useEffect, useRef } from "react";
 import "./ChatRoom.css";
 import { Link } from "react-router-dom";
 import { db } from "../../firebase";
-import { doc, deleteDoc } from "firebase/firestore";
+import {
+  doc,
+  deleteDoc,
+  query,
+  collection,
+  orderBy,
+  onSnapshot,
+} from "firebase/firestore";
 import { useHistory } from "react-router";
 import { useParams } from "react-router";
 
 const ChatRoom = (props) => {
   const { roomID } = useParams();
   const [hover, setHover] = useState();
+  const [lastMessage, setLastMessage] = useState();
   const roomNameRef = useRef();
   const history = useHistory();
+
+  useEffect(() => {
+    const q = query(
+      collection(db, `rooms/${props.id}/messages`),
+      orderBy("timestamp", "desc")
+    );
+    const unsub = onSnapshot(q, (snapshot) => {
+      setLastMessage(snapshot.docs[0]?.data().message);
+      console.log(snapshot.docs[0]?.data().message);
+      console.log(props.id);
+    });
+    return unsub;
+  }, [props.id]);
+
   useEffect(() => {
     roomNameRef.current.value = props.name;
-  }, []);
+    console.log(props.id === roomID);
+    return console.log("ChatRoom Clean up");
+  }, [props.name]);
 
   const deleteRoom = async () => {
     // const q = query(collection(db, `rooms/${props.id}/messages`));
@@ -48,11 +72,10 @@ const ChatRoom = (props) => {
             }}
           />
           <p className="last_message">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit optio
-            repellendus fuga, reiciendis minus natus!
+            {lastMessage ? lastMessage : "No Messages"}
           </p>
         </div>
-        {hover && (
+        {hover && props.createdBy === props.currentUser && (
           <IconButton onClick={deleteRoom}>
             <DeleteIcon color="error" />
           </IconButton>

@@ -14,7 +14,7 @@ const Register = () => {
   const passwordRef = useRef();
   const passwordConfirmationRef = useRef();
   const nameRef = useRef();
-  const { signup, currentUser } = useAuth();
+  const { signup } = useAuth();
   const history = useHistory();
   const submitHandler = async (e) => {
     e.preventDefault();

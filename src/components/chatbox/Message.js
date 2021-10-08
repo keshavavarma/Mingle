@@ -63,14 +63,16 @@ const Message = (props) => {
             <MenuItem onClick={handleClose}>
               <EditIcon fontSize="small" sx={{ color: "rgb(97, 100, 166)" }} />
             </MenuItem>
-            <MenuItem
-              onClick={() => {
-                deleteMessage(props.id);
-                handleClose();
-              }}
-            >
-              <DeleteIcon color="error" />
-            </MenuItem>
+            {props.currentUser && props.currentUser.uid === props.user && (
+              <MenuItem
+                onClick={() => {
+                  deleteMessage(props.id);
+                  handleClose();
+                }}
+              >
+                <DeleteIcon color="error" />
+              </MenuItem>
+            )}
           </Menu>
         </div>
       </div>
