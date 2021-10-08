@@ -8,8 +8,9 @@ import IconButton from "@mui/material/IconButton";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useHistory, Redirect } from "react-router";
+import { useHistory } from "react-router";
 import { useAuth } from "../../contexts/AuthContext";
+
 const NavBar = (props) => {
   const [darkMode, setDarkMode] = useState(false);
   const { currentUser } = useAuth();

@@ -8,16 +8,10 @@ import { useAuth } from "../../contexts/AuthContext";
 import {
   collection,
   query,
-  where,
-  getDocs,
-  QuerySnapshot,
   addDoc,
-  doc,
-  updateDoc,
   serverTimestamp,
   onSnapshot,
   orderBy,
-  deleteDoc,
 } from "firebase/firestore";
 
 const ChatBox = () => {
@@ -42,7 +36,7 @@ const ChatBox = () => {
       console.log(messages);
     });
     return unsub;
-  }, [roomID, newMessage]);
+  }, [roomID, newMessage, messages]);
 
   const submitHandler = async (e, input, url) => {
     e.preventDefault();

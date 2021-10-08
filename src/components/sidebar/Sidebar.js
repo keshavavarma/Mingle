@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Sidebar.css";
 import ChatIcon from "@mui/icons-material/Chat";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -9,9 +9,6 @@ import { db } from "../../firebase";
 import {
   collection,
   query,
-  where,
-  getDocs,
-  QuerySnapshot,
   addDoc,
   doc,
   updateDoc,
@@ -19,10 +16,10 @@ import {
   orderBy,
   serverTimestamp,
 } from "firebase/firestore";
-import { useParams } from "react-router";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Sidebar = () => {
-  const { roomID } = useParams();
+  const { currentUser } = useAuth();
   const [rooms, setRooms] = useState([]);
   const [newRoom, setNewRoom] = useState();
   const [updatedName, setUpdatedName] = useState();
@@ -30,6 +27,7 @@ const Sidebar = () => {
   const createRoomHandler = async () => {
     const newRoom = await addDoc(collection(db, "rooms"), {
       roomName: "New Room",
+      createdBy: currentUser.uid,
       timestamp: serverTimestamp(),
     });
     setNewRoom(newRoom);
@@ -54,7 +52,7 @@ const Sidebar = () => {
       );
     });
     return unsub;
-  }, [newRoom, updatedName]);
+  }, [newRoom, updatedName, rooms]);
 
   return (
     <div className="sidebar">
@@ -74,6 +72,8 @@ const Sidebar = () => {
             key={room.id}
             id={room.id}
             name={room.data.roomName}
+            createdBy={room.data.createdBy && room.data.createdBy}
+            currentUser={currentUser.uid}
             updateRoomName={updateRoomName}
           />
         ))}

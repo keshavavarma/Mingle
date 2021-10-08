@@ -3,7 +3,7 @@ import MainBody from "./MainBody";
 import NavBar from "./NavBar";
 import { useAuth } from "../../contexts/AuthContext";
 const Home = () => {
-  const { currentUser, logout } = useAuth();
+  const { logout } = useAuth();
   return (
     <div>
       <NavBar logout={logout} />
