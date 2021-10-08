@@ -34,6 +34,6 @@ https://user-images.githubusercontent.com/76467965/136600054-11907417-63eb-41ef-
   1. npm install 
   2. npm start 
    
-  *This application requires Firebase App configurations to work*
+  *This application requires Firebase App configurations *
   
 
