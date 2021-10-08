@@ -26,7 +26,7 @@ const Message = (props) => {
     await deleteDoc(doc(db, `rooms/${roomID}/messages/${id}`));
   };
   return (
-    <div className={props.receiver ? "message" : "message sender"}>
+    <div className={!props.receiver ? "message" : "message sender"}>
       <div className="messenger">
         <p>{props.name}</p>
         <div className="message_menu">
