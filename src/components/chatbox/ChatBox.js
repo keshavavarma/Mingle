@@ -9,9 +9,15 @@ import {
   collection,
   query,
   addDoc,
+  where,
+  getDocs,
+  QuerySnapshot,
+  doc,
+  updateDoc,
   serverTimestamp,
   onSnapshot,
   orderBy,
+  deleteDoc,
 } from "firebase/firestore";
 
 const ChatBox = () => {
@@ -36,7 +42,7 @@ const ChatBox = () => {
       console.log(messages);
     });
     return unsub;
-  }, [roomID, newMessage, messages]);
+  }, [roomID, newMessage]);
 
   const submitHandler = async (e, input, url) => {
     e.preventDefault();

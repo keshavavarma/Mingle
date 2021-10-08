@@ -23,21 +23,21 @@ const ChatRoom = (props) => {
   const history = useHistory();
 
   useEffect(() => {
-    if (props.id) {
-      const q = query(
-        collection(db, `rooms/${props.id}/messages`),
-        orderBy("timestamp", "dsc")
-      );
-      const unsub = onSnapshot(q, (snapshot) => {
-        setLastMessage(snapshot.docs[0]);
-        console.log(lastMessage);
-      });
-      return unsub;
-    }
-  }, [lastMessage, props.id]);
+    const q = query(
+      collection(db, `rooms/${props.id}/messages`),
+      orderBy("timestamp", "desc")
+    );
+    const unsub = onSnapshot(q, (snapshot) => {
+      setLastMessage(snapshot.docs[0]?.data().message);
+      console.log(snapshot.docs[0]?.data().message);
+      console.log(props.id);
+    });
+    return unsub;
+  }, [props.id]);
 
   useEffect(() => {
     roomNameRef.current.value = props.name;
+    console.log(props.id === roomID);
     return console.log("ChatRoom Clean up");
   }, [props.name]);
 

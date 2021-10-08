@@ -52,7 +52,7 @@ const Sidebar = () => {
       );
     });
     return unsub;
-  }, [newRoom, updatedName, rooms]);
+  }, [newRoom]);
 
   return (
     <div className="sidebar">
@@ -73,7 +73,7 @@ const Sidebar = () => {
             id={room.id}
             name={room.data.roomName}
             createdBy={room.data.createdBy && room.data.createdBy}
-            currentUser={currentUser.uid}
+            currentUser={currentUser && currentUser.uid}
             updateRoomName={updateRoomName}
           />
         ))}
